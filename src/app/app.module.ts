@@ -12,8 +12,9 @@ import { Page2 } from '../pages/page2/page2';
 // -----------------------------------------------------------------
 // Providers
 // -----------------------------------------------------------------
-import {FirebaseService} from '../providers/firebase-service'
-import {ComunService} from '../providers/comun-service'
+import { FirebaseService } from '../providers/firebase-service'
+import { ComunService } from '../providers/comun-service'
+import { UserBack } from '../providers/user-back'
 
 
 @NgModule({
@@ -31,6 +32,6 @@ import {ComunService} from '../providers/comun-service'
     Page1,
     Page2
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},FirebaseService,ComunService]
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, FirebaseService, ComunService, UserBack]
 })
-export class AppModule {}
+export class AppModule { }

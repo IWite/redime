@@ -1,4 +1,4 @@
-# baseIonic
+# Redime
 
 This is a templete with some ommon codes for general aplications, this include general function of Firebase
 

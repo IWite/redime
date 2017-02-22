@@ -1,10 +1,10 @@
 const config_dev = {
 	firebaseConfig: {
-		apiKey: '',
-		authDomain: '',
-		databaseURL: '',
-		storageBucket: '',
-		messagingSenderId: ''
+		apiKey: 'AIzaSyA1LW0612NA3SO8Wsg60kFCqOuB1-hVDLY',
+		authDomain: 'redime-dev.firebaseapp.com',
+		databaseURL: 'https://redime-dev.firebaseio.com',
+		storageBucket: 'redime-dev.appspot.com',
+		messagingSenderId: '422692571227'
 	}
 
 }

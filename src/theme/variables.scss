@@ -13,7 +13,76 @@ $font-path: "../assets/fonts";
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
 
+ion-input{
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  input{
+    text-align: center;
+  }
+} 
 
+ion-datetime{
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #999999;
+  .datetime-text{
+    text-align: center;
+  }
+}
+
+.tabs {
+  .ion-ios-icon1:before {
+    content: "b";
+  }
+  .ion-md-icon1:before {
+    content: "b";
+  }
+  .ion-ios-icon1-outline:before {
+    content: "b";
+  }
+  .ion-md-icon1-outline:before {
+    content: "b";
+  }
+
+
+
+  .ion-ios-icon2:before {
+    content: "d";
+  }
+  .ion-md-icon2:before {
+    content: "d";
+  }
+  .ion-ios-icon2-outline:before {
+    content: "d";
+  }
+  .ion-md-icon2-outline:before {
+    content: "d";
+  }
+
+
+  .ion-ios-icon3:before {
+    content: "e";
+  }
+  .ion-md-icon3:before {
+    content: "e";
+  }
+  .ion-ios-icon3-outline:before {
+    content: "e";
+  }
+  .ion-md-icon3-outline:before {
+    content: "e";
+  }
+
+  
+}
+
+
+$toolbar-ios-button-font-size: 2.5rem;
+$toolbar-md-button-font-size: 2.5rem;
 
 // Named Color Variables
 // --------------------------------------------------
@@ -28,7 +97,11 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  face:       #3b5998,
+  redime_blu: #004160,
+  redime_gre: #00e4a6,
+  redime_red: #ff5d71
 );
 
 

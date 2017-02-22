@@ -10,6 +10,11 @@ import { environment } from './environment';
 // -----------------------------------------------------------------
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
+import { LoginPage } from '../pages/login/login';
+// -----------------------------------------------------------------
+// Providers
+// -----------------------------------------------------------------
+import {UserBack} from '../providers/user-back'
 // -----------------------------------------------------------------
 // Libraries
 // -----------------------------------------------------------------
@@ -36,7 +41,7 @@ export class MyApp {
 	// -----------------------------------------------------------------
 	// Atributos
 	// -----------------------------------------------------------------
-	constructor(public platform: Platform) {
+	constructor(public platform: Platform, private userBack : UserBack) {
 		this.initializeApp();
 		// inicializa el servicio de firebase
 		firebase.initializeApp(environment.firebaseConfig)
@@ -45,6 +50,7 @@ export class MyApp {
 			{ title: 'Page One', component: Page1 },
 			{ title: 'Page Two', component: Page2 }
 		];
+
 	}
 
 	// -----------------------------------------------------------------
@@ -59,6 +65,7 @@ export class MyApp {
 		this.platform.ready().then(() => {
 			StatusBar.styleDefault();
 			Splashscreen.hide();
+			this.userSatate()
 		});
 	}
 
@@ -80,9 +87,15 @@ export class MyApp {
 	userSatate() {
 		firebase.auth().onAuthStateChanged(((user: firebase.User) => {
 			if(user){
+				this.userBack.user = user
+				firebase.database().ref('usuario/' + user.uid + '/').once('value',snap=>{
+					if(snap.val())
+						this
+				})
 				// User logIn
 			}
 			else{
+				this.nav.setRoot(LoginPage);
 				// User logOut
 			}
 		}))
