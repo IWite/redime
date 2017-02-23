@@ -26,13 +26,13 @@
     "ionic-angular": "2.0.1",
     "ionic-native": "2.4.1",
     "ionicons": "3.0.0",
+    "ng2-qrcode": "^0.1.1",
     "rxjs": "5.0.0-beta.12",
     "sw-toolbox": "3.4.0",
-    "typedoc": "^0.5.5",
     "zone.js": "0.6.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "1.0.0",
+    "@ionic/app-scripts": "1.1.0",
     "tslint-loader": "^3.4.2",
     "typescript": "2.0.9"
   },

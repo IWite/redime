@@ -1,40 +1,40 @@
 page-login {
-  .content-ios {
-    background: #00e4a6;
-  }
-  .content-md {
-    background: #00e4a6;
-  }
-  input {
-    text-align: center;
-  }
-  .button-ios {
-    border-radius: 10px;
-  }
-  .button-md {
-    border-radius: 10px;
-  }
-  .facebook {
-    text-align: center;
-    margin-top: 13vh;
-  }
-  .content-ios hr {
-    height: 1px;
-    background-color: rgb(0, 0, 0);
-  }
-  .content-md hr {
-    height: 1px;
-    background-color: rgb(0, 0, 0);
-  }
-  .my-icon {
-    position: absolute;
-    top: 32%;
-    left: 11px;
-    font-size: 1.3em;
-  }
-  @media (min-height: 600px) {
-    .facebook {
-      margin-top: 20vh;
+    .content-ios {
+        background: #00e4a6;
     }
-  }
+    .content-md {
+        background: #00e4a6;
+    }
+    input {
+        text-align: center;
+    }
+    .button-ios {
+        border-radius: 10px;
+    }
+    .button-md {
+        border-radius: 10px;
+    }
+    .facebook {
+        text-align: center;
+        margin-top: 13vh;
+    }
+    .content-ios hr {
+        height: 1px;
+        background-color: rgb(0, 0, 0);
+    }
+    .content-md hr {
+        height: 1px;
+        background-color: rgb(0, 0, 0);
+    }
+    .my-icon {
+        position: absolute;
+        top: 32%;
+        left: 11px;
+        font-size: 1.3em;
+    }
+    @media (min-height: 600px) {
+        .facebook {
+            margin-top: 20vh;
+        }
+    }
 }

@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar color="redime_blu" >
+        <button ion-button menuToggle start>
+        <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            {{titulo}}
+        </ion-title>
+
+        <ion-buttons end>
+        <button ion-button icon-only (click)="openModal()">
+            <ion-icon name="md-qr-scanner"></ion-icon>
+        </button>
+        </ion-buttons>
+
+
+    </ion-navbar>
+</ion-header>
+
+<ion-tabs color="redime_blu">
+    <ion-tab [root]="tab1Root" tabTitle="Principal" tabIcon="ios-home" (ionSelect)="titulo = 'Principal'"></ion-tab>
+    <ion-tab [root]="tab2Root" tabTitle="Restaurantes" tabIcon="ios-restaurant" (ionSelect)="titulo = 'Restaurantes'"></ion-tab>
+</ion-tabs>

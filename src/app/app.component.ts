@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------
 // Components
 // -----------------------------------------------------------------
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, NgZone } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { environment } from './environment';
@@ -11,6 +11,8 @@ import { environment } from './environment';
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register'
+import { HomePage } from '../pages/home/home'
 // -----------------------------------------------------------------
 // Providers
 // -----------------------------------------------------------------
@@ -34,14 +36,14 @@ export class MyApp {
 
 	@ViewChild(Nav) nav: Nav;
 
-	rootPage: any = Page1;
+	rootPage: any;
 
 	pages: Array<{ title: string, component: any }>;
 
 	// -----------------------------------------------------------------
 	// Atributos
 	// -----------------------------------------------------------------
-	constructor(public platform: Platform, private userBack : UserBack) {
+	constructor(public platform: Platform, private userBack : UserBack, private zone: NgZone) {
 		this.initializeApp();
 		// inicializa el servicio de firebase
 		firebase.initializeApp(environment.firebaseConfig)
@@ -89,14 +91,18 @@ export class MyApp {
 			if(user){
 				this.userBack.user = user
 				firebase.database().ref('usuario/' + user.uid + '/').once('value',snap=>{
-					if(snap.val())
-						this
+					if(snap.val()){
+						this.zone.run(()=>this.nav.setRoot(HomePage))
+						
+					}
+					else{
+						this.zone.run(()=>this.nav.setRoot(RegisterPage))
+					}
+						
 				})
-				// User logIn
 			}
 			else{
-				this.nav.setRoot(LoginPage);
-				// User logOut
+				this.zone.run(()=>this.nav.setRoot(LoginPage))
 			}
 		}))
 	}
