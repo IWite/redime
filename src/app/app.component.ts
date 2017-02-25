@@ -89,16 +89,14 @@ export class MyApp {
 	userSatate() {
 		firebase.auth().onAuthStateChanged(((user: firebase.User) => {
 			if(user){
-				this.userBack.user = user
-				firebase.database().ref('usuario/' + user.uid + '/').once('value',snap=>{
+				this.userBack.iniciar(user)
+				firebase.database().ref('usuarios/' + user.uid + '/').once('value',snap=>{
 					if(snap.val()){
 						this.zone.run(()=>this.nav.setRoot(HomePage))
-						
 					}
 					else{
 						this.zone.run(()=>this.nav.setRoot(RegisterPage))
-					}
-						
+					}	
 				})
 			}
 			else{

@@ -7,7 +7,7 @@
 <ion-content padding>
   <div class="marco-foto" tappable (click)="tomarFoto()">
     <div class="fondo">
-      <span class="icon-camera" style="margin-top: 12px;" *ngIf="!foto"></span>
+      <ion-icon name="camera" *ngIf="!foto"></ion-icon>
       <img [src]="foto" alt="" *ngIf="foto">
     </div>
   </div>

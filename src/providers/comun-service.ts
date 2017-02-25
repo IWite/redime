@@ -159,4 +159,9 @@ export class ComunService {
         })
 
     }
+
+    getActionSheet(json){
+        let act = this.actionSheetCtrl.create(json)
+        act.present()
+    }
 }

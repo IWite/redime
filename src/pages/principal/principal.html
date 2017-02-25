@@ -17,13 +17,14 @@
 
   <ion-item style="padding-left: 0;">
     <ion-label>Tus puntos</ion-label>
-    <ion-input type="text" value="{{puntos}} Pts."></ion-input>
+    <ion-input type="text" value="{{puntos}} Pts." readonly></ion-input>
   </ion-item>
 
   <ion-item style="padding-left: 0;">
     <ion-label>Puntos red</ion-label>
-    <ion-input type="text" value="{{arbol}} Pts."></ion-input>
+    <ion-input type="text" value="{{arbol}} Pts." readonly></ion-input>
   </ion-item>
 
+  <button ion-button full (click)="opcionAgregar()" color="redime_blu">Agragar amigo</button>
   <button ion-button full (click)="modal()" color="redime_gre">Mi código</button>
 </ion-content>

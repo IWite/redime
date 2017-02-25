@@ -11,7 +11,7 @@ import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
-import { PrincipalPage,Codigo } from '../pages/principal/principal';
+import { PrincipalPage } from '../pages/principal/principal';
 import { RestaurantesPage } from '../pages/restaurantes/restaurantes';
 import { HomePage } from '../pages/home/home'
 // -----------------------------------------------------------------
@@ -21,6 +21,10 @@ import { FirebaseService } from '../providers/firebase-service'
 import { ComunService } from '../providers/comun-service'
 import { UserBack } from '../providers/user-back'
 
+// -----------------------------------------------------------------
+// Extra
+// -----------------------------------------------------------------
+import {CodigoComponent} from'../components/codigo/codigo'
 import {QRCodeComponent} from 'ng2-qrcode'
 
 
@@ -32,10 +36,10 @@ import {QRCodeComponent} from 'ng2-qrcode'
     LoginPage,
     RegisterPage,
     PrincipalPage,
-    Codigo,
     RestaurantesPage,
     HomePage,
-    QRCodeComponent
+    QRCodeComponent,
+    CodigoComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -48,9 +52,9 @@ import {QRCodeComponent} from 'ng2-qrcode'
     LoginPage,
     RegisterPage,
     PrincipalPage,
-    Codigo,
     RestaurantesPage,
-    HomePage
+    HomePage,
+    CodigoComponent
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, FirebaseService, ComunService, UserBack]
 })

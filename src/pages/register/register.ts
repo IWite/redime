@@ -82,26 +82,24 @@ export class RegisterPage {
 
             let loading = this.comun.showLoad('Cargando...')
             loading.present();
-            this.firebaseService.updateInfoUser(this.nombre, this.foto).then(
-                () => {
+            let infoUser = {
+                fecha: this.fecha,
+                cedula: this.cedula,
+                puntos: 0,
+                puntosRed:0,
+                numAmigos:5
+            }
+            this.firebaseService.updateInfoUser(this.nombre, this.foto)
+            this.userBack.crearUsuario(infoUser).then(
+                ()=>{
                     loading.dismiss()
-                    let cod = 'us:'+this.stringGen(5)
-                    firebase.database().ref('usuario/' + this.userBack.user.uid).set({
-                        fecha: this.fecha,
-                        cedula: this.cedula,
-                        codigo: cod
-                    })
-                    firebase.database().ref('cod_usuarios/'+cod).set(this.userBack.user.uid)
                     this.navCtrl.setRoot(HomePage)
-                },
-                err => {
-                    this.comun.showAlert('Error', err)
                 }
             )
         }
     }
 
-    stringGen(len:number):string {
+    stringGen(len: number): string {
         let text = "";
 
         let charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#-";
