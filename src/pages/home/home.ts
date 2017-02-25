@@ -3,6 +3,11 @@ import { NavController } from 'ionic-angular';
 import { PrincipalPage } from '../principal/principal'
 import { RestaurantesPage } from '../restaurantes/restaurantes'
 
+import {HomeBack} from '../../providers/home-back'
+import {UserBack} from '../../providers/user-back'
+
+import * as firebase from 'firebase';
+
 /*
   Generated class for the Home tabs.
 
@@ -11,7 +16,8 @@ import { RestaurantesPage } from '../restaurantes/restaurantes'
 */
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers: [HomeBack]
 })
 export class HomePage {
 
@@ -19,7 +25,7 @@ export class HomePage {
   tab2Root: any ;
   titulo: string;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private homBack:HomeBack, private userbac: UserBack) {
     this.tab1Root = PrincipalPage;
     this.tab2Root = RestaurantesPage;
   }
@@ -28,4 +34,11 @@ export class HomePage {
     console.log('ionViewDidLoad homeeeeeeeeeeeeeeeeeeeeee');
   }
 
+  openModal(){
+    firebase.database().ref('restaurante/r1').once('value',snap=>{
+      let datos = snap.val()
+      this.homBack.agregarCompra(10000,datos,this.userbac.datosUsuatio.padre,'r1')
+    })
+    
+  }
 }

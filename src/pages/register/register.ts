@@ -87,7 +87,8 @@ export class RegisterPage {
                 cedula: this.cedula,
                 puntos: 0,
                 puntosRed:0,
-                numAmigos:5
+                numAmigos:5,
+                consumo:0
             }
             this.firebaseService.updateInfoUser(this.nombre, this.foto)
             this.userBack.crearUsuario(infoUser).then(
