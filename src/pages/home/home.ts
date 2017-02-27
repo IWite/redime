@@ -35,7 +35,7 @@ export class HomePage {
   }
 
   openModal(){
-    firebase.database().ref('restaurante/r1').once('value',snap=>{
+    firebase.database().ref('porceRestaurantes/r1').once('value',snap=>{
       let datos = snap.val()
       this.homBack.agregarCompra(10000,datos,this.userbac.datosUsuatio.padre,'r1')
     })

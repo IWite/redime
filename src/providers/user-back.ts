@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Subject } from 'rxjs/Subject';
-import { DatosUsuario } from '../interfaces'
+import { DatosUsuario, infoPuntos } from '../interfaces'
 // -----------------------------------------------------------------
 // Libraries
 // -----------------------------------------------------------------
@@ -62,11 +62,11 @@ export class UserBack {
 
 	/**
 	 * Crea un usuario
-	 * @param {Object} json Datos del usuario 
+	 * @param {DatosUsuario} json Datos del usuario 
 	 * @returns {Promise<null>} Respuesta del metodo
 	 * @memberOf UserBack
 	 */
-	crearUsuario(json: Object): Promise<null> {
+	crearUsuario(json: DatosUsuario): Promise<null> {
 		return new Promise(data => {
 			this.generarCod(this.user.uid).then((cod) => {
 				json['cod_usr'] = cod
@@ -135,18 +135,18 @@ export class UserBack {
 	}
 
 	darPuntos() {
-		this.refUsuario.child(this.user.uid + '/puntos').on('value', snap => {
+		this.refUsuario.child(this.user.uid + '/infoPuntos/puntos').on('value', snap => {
 			this.puntos.next(snap.val())
 		})
 	}
 
 	darPuntosRed() {
-		this.refUsuario.child(this.user.uid + '/puntosRed').on('value', snap => {
+		this.refUsuario.child(this.user.uid + '/infoPuntos/puntosRed').on('value', snap => {
 			this.puntosRed.next(snap.val())
 		})
 	}
 
-	TieneHijo(cod: string):Promise<boolean> {
+	TieneHijo(cod: string): Promise<boolean> {
 		return new Promise(dat => {
 			firebase.database().ref('cod_usr/' + cod).once('value', snap => {
 				let obj = snap.val()
@@ -158,9 +158,38 @@ export class UserBack {
 					dat(false)
 			})
 		})
-
-
 	}
+
+	canjearPunto(): Promise<string> {
+		return new Promise(data => {
+			let estado = ''
+			this.refUsuario.child(this.user.uid + '/infoPuntos').transaction((data: infoPuntos) => {
+				if (data) {
+					if (data.puntosRed == 0)
+						estado = 'No tienes puntos de tu red'
+					else if (data.consumo >= data.puntosRed) {
+						estado = 'Se agregaron ' + data.puntosRed + ' puntos de tu red a tus puntos'
+						data.consumo -= data.puntosRed
+						data.puntos += data.puntosRed
+						data.puntosRed = 0
+					}
+					else {
+						let ppunto = data.puntosRed - (data.puntosRed - data.consumo )
+						estado = 'Tu consumo actual es de ' + data.consumo + ', se han agregado ' + ppunto + ' puntos de tu red a tus puntos'
+						data.consumo -= ppunto
+						data.puntos += ppunto
+						data.puntosRed -= ppunto
+					}
+
+				}
+				return data
+			}, (a, b, c) => {
+				data(estado)
+			})
+		})
+	}
+
+
 
 }
 

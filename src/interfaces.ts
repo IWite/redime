@@ -1,41 +1,75 @@
+// -----------------------------------------------------------------
+// Usuario
+// -----------------------------------------------------------------
+
 export interface DatosUsuario {
 	cedula: string,
-	cod_usr: string,
+	cod_usr?: string,
 	fecha: string,
+	hijos?: Object
+	padre?: string,
+	infoPuntos: infoPuntos
+}
+
+export interface infoPuntos {
 	puntos: number,
 	puntosRed: number,
-    numAmigos: number,
-    hijos? : Object
-    padre?: string,
-	consumo? : number,
-	historico?: Object
+	numAmigos: 5,
+	consumo: number,
+	historico?: HistoricoUsuario
+
 }
 
-export interface DatosRestaurante{
-	porBase:number,
-	porRed:number,
-	porcentaje:number,
+export interface HistoricoUsuario {
+	[index: string]: {
+		tipo: string,
+		restaurante: string
+		valor: number,
+		ganancia: number,
+		fecha: string
+	}
+
+}
+
+// -----------------------------------------------------------------
+// Restaurante
+// -----------------------------------------------------------------
+
+export interface DatosRestaurante {
 	pago: number
-	historico?: Object
+	historico?: HistoricoRestaurante
 }
 
-export interface Empresa{
-	pago:number,
-	historico: Object
+export interface HistoricoRestaurante {
+	[index: string]: {
+		compra: number,
+		usuario: string,
+		pagoRedime: number,
+		fecha: string
+	}
 }
 
-export interface HistoricoEmpresa{
-	tipo: string,
-	restaurante: string
-	valor: number,
-	ganancia: number,
-	fecha:string
+export interface PorceRestaurante {
+	porcentajeBase: number,
+	porcentajeRed: number,
+	porcentajeCompra: number,
 }
 
-export interface HistoricoUsuario{
-	tipo: string,
-	restaurante: string
-	valor: number,
-	ganancia: number,
-	fecha:string
+
+// -----------------------------------------------------------------
+// Empresa
+// -----------------------------------------------------------------
+export interface Empresa {
+	pago: number,
+	historico: HistoricoEmpresa
+}
+
+export interface HistoricoEmpresa {
+	[index: string]: {
+		tipo: string,
+		restaurante: string
+		valor: number,
+		ganancia: number,
+		fecha: string
+	}
 }

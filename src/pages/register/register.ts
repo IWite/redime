@@ -17,6 +17,7 @@ import { UserBack } from '../../providers/user-back'
 // Libraries
 // -----------------------------------------------------------------
 import * as firebase from 'firebase';
+import { DatosUsuario } from '../../interfaces'
 
 
 
@@ -82,13 +83,15 @@ export class RegisterPage {
 
             let loading = this.comun.showLoad('Cargando...')
             loading.present();
-            let infoUser = {
+            let infoUser:DatosUsuario = {
                 fecha: this.fecha,
                 cedula: this.cedula,
-                puntos: 0,
-                puntosRed:0,
-                numAmigos:5,
-                consumo:0
+                infoPuntos:{
+                    consumo:0,
+                    numAmigos:5,
+                    puntos:0,
+                    puntosRed:0
+                }
             }
             this.firebaseService.updateInfoUser(this.nombre, this.foto)
             this.userBack.crearUsuario(infoUser).then(

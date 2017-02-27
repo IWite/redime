@@ -140,7 +140,7 @@ export class PrincipalPage {
 		debugger
 		if (cod == this.userBack.datosUsuatio.cod_usr)
 			this.comun.showAlert('Error', 'Código no valido')
-		else if (this.userBack.datosUsuatio.hijos && Object.keys(this.userBack.datosUsuatio.hijos).length >= this.userBack.datosUsuatio.numAmigos)
+		else if (this.userBack.datosUsuatio.hijos && Object.keys(this.userBack.datosUsuatio.hijos).length >= this.userBack.datosUsuatio.infoPuntos.numAmigos)
 			this.comun.showAlert('Error', 'No puedes agregar más amigos')
 		else {
 			this.homeBack.agregarAmigo(cod, this.userBack.user.uid).then(
@@ -173,7 +173,12 @@ export class PrincipalPage {
 			this.homeBack.guardarAmigos(this.userBack.user.uid, this.userBack.datosUsuatio.hijos)
 			this.comun.showAlert('Éxito', 'Su nuevo hijo se ha agregado')
 		}
+	}
 
+	canjearPuntos(){
+		this.userBack.canjearPunto().then(info=>{
+			this.comun.showAlert('Mensaje',info)
+		})
 	}
 
 

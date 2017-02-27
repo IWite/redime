@@ -4,7 +4,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { DatosUsuario, DatosRestaurante ,HistoricoEmpresa, Empresa, HistoricoUsuario} from '../interfaces'
+import { DatosUsuario, DatosRestaurante, PorceRestaurante ,HistoricoEmpresa, Empresa, HistoricoUsuario, infoPuntos} from '../interfaces'
 // -----------------------------------------------------------------
 // Libraries
 // -----------------------------------------------------------------
@@ -89,15 +89,15 @@ export class HomeBack {
 		this.refUsuarios.child(id + '/hijos').update(hijos)
 	}
 
-	agregarCompra(valor, rest: DatosRestaurante, padre: string, nombreRestaurante:string) {
+	agregarCompra(valor:number, rest: PorceRestaurante, padre: string, nombreRestaurante:string) {
 		
-		let precioBase = valor * rest.porcentaje
+		let precioBase = valor * rest.porcentajeCompra
 
-		let valorUsuario = precioBase * rest.porRed
+		let valorUsuario = precioBase * rest.porcentajeRed
 
 		let gananciaEmpresa = precioBase - valorUsuario
 
-		let gananciaBase = valorUsuario * rest.porBase
+		let gananciaBase = valorUsuario * rest.porcentajeBase
 
 		let donacionRed = valorUsuario - gananciaBase
 		
@@ -112,20 +112,20 @@ export class HomeBack {
 		// -----------------------------------------------------------------
 		// Actualizacion usuario
 		// -----------------------------------------------------------------
-		firebase.database().ref('usuarios/'+user.uid).transaction((data:DatosUsuario)=>{
+		firebase.database().ref('usuarios/'+user.uid+'/infoPuntos').transaction((data:infoPuntos)=>{
 			if(data){
 				data.puntos += gananciaBase
 				data.consumo += valor
 				if(!data.historico)
 					data.historico = {}
-				let his:HistoricoUsuario ={
-					tipo: 'CONSUMO',
+				data.historico[fecha] = {
 					fecha: fech,
 					ganancia: gananciaBase,
-					restaurante:nombreRestaurante,
+					restaurante : nombreRestaurante,
+					tipo: 'CONSUMO',
 					valor: valor
+
 				}
-				data.historico[fecha] = his
 			}
 			return data
 		})
@@ -155,14 +155,13 @@ export class HomeBack {
 			if(data){
 				if(!data.historico)
 					data.historico = {}
-				let his: HistoricoEmpresa = {
-					restaurante : nombreRestaurante,
-					tipo : 'COBRO',
-					valor: precioBase,
+				data.historico[fecha]  = {
+					fecha: fech,
 					ganancia: gananciaEmpresa,
-					fecha: fech
+					restaurante: nombreRestaurante,
+					tipo : 'COBRO',
+					valor: precioBase
 				}
-				data.historico[fecha]  = his
 				data.pago += gananciaEmpresa
 			}	
 			return data
@@ -178,10 +177,10 @@ export class HomeBack {
 			let nPuntos = puntos * 0.5
 			let cond = false
 			let npadre = ''
-			firebase.database().ref('usuarios/' + id).transaction(
+			firebase.database().ref('usuarios/' + id ).transaction(
 				(data:DatosUsuario) => {
 					if (data) {
-						data.puntosRed += nPuntos
+						data.infoPuntos.puntosRed += nPuntos
 						if(data.padre){
 							cond = true
 							npadre = data.padre

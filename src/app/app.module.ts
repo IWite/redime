@@ -7,13 +7,12 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 // Page
 // -----------------------------------------------------------------
 import { MyApp } from './app.component';
-import { Page1 } from '../pages/page1/page1';
-import { Page2 } from '../pages/page2/page2';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { PrincipalPage } from '../pages/principal/principal';
 import { RestaurantesPage } from '../pages/restaurantes/restaurantes';
-import { HomePage } from '../pages/home/home'
+import { HomePage } from '../pages/home/home';
+import { HistorialPage } from '../pages/historial/historial'
 // -----------------------------------------------------------------
 // Providers
 // -----------------------------------------------------------------
@@ -31,15 +30,14 @@ import {QRCodeComponent} from 'ng2-qrcode'
 @NgModule({
   declarations: [
     MyApp,
-    Page1,
-    Page2,
     LoginPage,
     RegisterPage,
     PrincipalPage,
     RestaurantesPage,
     HomePage,
     QRCodeComponent,
-    CodigoComponent
+    CodigoComponent,
+    HistorialPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -47,14 +45,13 @@ import {QRCodeComponent} from 'ng2-qrcode'
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    Page1,
-    Page2,
     LoginPage,
     RegisterPage,
     PrincipalPage,
     RestaurantesPage,
     HomePage,
-    CodigoComponent
+    CodigoComponent,
+    HistorialPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, FirebaseService, ComunService, UserBack]
 })

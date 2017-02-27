@@ -8,11 +8,10 @@ import { environment } from './environment';
 // -----------------------------------------------------------------
 // Pages
 // -----------------------------------------------------------------
-import { Page1 } from '../pages/page1/page1';
-import { Page2 } from '../pages/page2/page2';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register'
 import { HomePage } from '../pages/home/home'
+import { HistorialPage } from '../pages/historial/historial'
 // -----------------------------------------------------------------
 // Providers
 // -----------------------------------------------------------------
@@ -49,8 +48,8 @@ export class MyApp {
 		firebase.initializeApp(environment.firebaseConfig)
 		// Estructura para navegar entre páginas
 		this.pages = [
-			{ title: 'Page One', component: Page1 },
-			{ title: 'Page Two', component: Page2 }
+			{ title: 'Principal', component: HomePage },
+			{ title: 'Historial', component: HistorialPage}
 		];
 
 	}
@@ -80,6 +79,15 @@ export class MyApp {
 		// Reset the content nav to have just this page
 		// we wouldn't want the back button to show in this scenario
 		this.nav.setRoot(page.component);
+	}
+
+	
+	/**
+	 * Cierra sesion en la app
+	 * @memberOf MyApp
+	 */
+	salir(){
+		firebase.auth().signOut()
 	}
 
 	/**
