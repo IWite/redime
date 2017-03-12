@@ -28,6 +28,8 @@ export class LoginPage {
 	// Atributos
 	// -----------------------------------------------------------------
 
+	login = {}
+
 	email: string
 
 	password: string
@@ -50,7 +52,7 @@ export class LoginPage {
 	// Metodos
 	// -----------------------------------------------------------------
 	ionViewDidLoad() {
-		console.log('ionViewDidLoad LoginPage');
+
 	}
 
 	/**

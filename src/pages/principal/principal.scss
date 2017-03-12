@@ -1,3 +1,60 @@
 page-principal {
-
+    .fondolinea {
+        width: 100%;
+        background: white;
+        border-radius: 50%;
+        border: 2px solid color($colors, redime_gre);
+        margin: auto;
+        padding: 3px;
+    }
+    .foto {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: color($colors, redime_gre);
+        overflow: hidden;
+    }
+    .textcont {
+        color: #222;
+        font-size: 2vh;
+        span {
+            display: block
+        }
+    }
+    .info {
+        height: 50%;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+    }
+    .puntos {
+        background: color($colors, redime_gre);
+        width: 100%;
+        padding: 10px 16px;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-size: 3vh;
+    }
+    .pts {
+        color: #464646;
+        font-size: 1.2em;
+    }
+    .content-ios {
+        background: color($colors, fondo2);
+    }
+    .content-md {
+        background: color($colors, fondo2);
+    }
+    .cod {
+        height: 18vh;
+        margin: auto;
+        text-align: center;
+    }
+    .cont2 {
+        height: 50%;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
 }

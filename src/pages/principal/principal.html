@@ -4,29 +4,61 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-  <ion-navbar>
-    <ion-title> </ion-title>
-  </ion-navbar>
+<ion-header no-border>
+    <ion-toolbar color="fondo2">
+
+        <ion-title>Redime</ion-title>
+
+        <ion-buttons end (click)="salir()">
+            <button ion-button icon-only>
+        <ion-icon color="redime_red" name="ios-exit-outline"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
-  
+    <div class="info">
+        <ion-grid>
+            <ion-row align-items-center>
+                <ion-col col-5>
+                    <div class="fondolinea" id="fond">
+                        <div class="foto"  text-center>
+                            <img *ngIf="foto" [src]="foto" alt="" style="width: 100%;">
+                            <ion-icon *ngIf="!foto" name="md-person" style="font-size: 7.2em;"></ion-icon>
+                        </div>
+                    </div>
+                </ion-col>
+                <ion-col col-7 class="textcont">
+                    <span style="font-weight: bold;font-size: 2em;">¡Hola {{nombre}}!</span>
+                    <span>{{email}}</span>
+                    <span>{{fecha}}</span>
 
-  <ion-item style="padding-left: 0;">
-    <ion-label>Tus puntos</ion-label>
-    <ion-input type="text" value="{{puntos}} Pts." readonly></ion-input>
-  </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <div class="cont2">
+        <div class="puntos">
+            <span style="display: block">Tus puntos: <span class="pts">{{puntos}}</span> pts</span>
+            <span style="display: block">Tu red: <span class="pts">{{arbol}}</span> pts</span>
+            <button ion-button outline block color="blanco">Canjear puntos red</button>
+        </div>
+    </div>
 
-  <ion-item style="padding-left: 0;">
-    <ion-label>Puntos red</ion-label>
-    <ion-input type="text" value="{{arbol}} Pts." readonly></ion-input>
-  </ion-item>
 
-  <button ion-button full (click)="canjearPuntos()" color="redime_blu">Canjear puntos red</button>
-  <button ion-button full (click)="opcionAgregar()" color="redime_blu">Agragar amigo</button>
-  <button ion-button full (click)="modal()" color="redime_gre">Mi código</button>
 
 </ion-content>
+
+<ion-footer no-border text-center>
+    <span>Tu código</span>
+    <ion-toolbar color="fondo2" style="padding-top: 3vh; border-top: 1px solid #00e4a6" (click)="modal()">
+        <div class="cod">
+             <qrcode [qrdata]="codigo" [size]="100" [level]="'M'" usesvg=true></qrcode>
+        </div>
+        <span style="font-size: 1.5em; font-weight: bold">{{codigo}}</span>
+      
+    </ion-toolbar>
+</ion-footer>

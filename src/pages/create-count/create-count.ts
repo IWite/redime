@@ -54,6 +54,8 @@ export class CreateCountPage {
 
   ionViewDidLoad() {
     document.getElementsByClassName('datetime-text')[0].innerHTML = 'Fecha nacimiento'
+    let a  = document.getElementsByClassName('scroll-content')
+		console.log(a);
   }
 
   /**

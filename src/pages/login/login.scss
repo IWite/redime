@@ -67,10 +67,16 @@ page-login {
         margin-top: 3vh;
         display: block;
     }
-
-    .scroll-content{
+    .scroll-content {
         display: flex;
         align-items: center;
-        overflow-y: hidden;
+    }
+    .miinput {
+        width: 100%;
+        border: none;
+        background: transparent;
+        text-align: center;
+        border-bottom: 1px solid;
+        padding: 10px 8px;
     }
 }

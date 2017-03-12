@@ -17,6 +17,8 @@ import { HomeBack } from '../../providers/home-back'
 import { QRCodeComponent } from 'ng2-qrcode'
 import { CodigoComponent } from '../../components/codigo/codigo'
 import { BarcodeScanner } from 'ionic-native';
+import * as firebase from 'firebase';
+
 
 
 
@@ -31,6 +33,12 @@ export class PrincipalPage {
 	arbol: string
 
 	subscrip: Array<Subscription> = []
+
+	nombre:string
+	foto: string
+	email: string
+	fecha: string
+	codigo: string
 
 	constructor(
 		public navCtrl: NavController,
@@ -64,7 +72,20 @@ export class PrincipalPage {
 
 		this.userBack.darPuntosRed()
 		this.userBack.darPuntos()
+
+		this.nombre = this.userBack.user.displayName
+		this.foto = this.userBack.user.photoURL
+		this.email = this.userBack.user.email
+		this.fecha = this.userBack.datosUsuatio.fecha
+		this.codigo = this.userBack.datosUsuatio.cod_usr
+
 	}
+
+	ionViewDidLoad() {
+		let ele = document.getElementById('fond')
+		ele.style.height = ele.offsetWidth + 'px'
+	}
+
 
 
 	modal() {
@@ -175,10 +196,14 @@ export class PrincipalPage {
 		}
 	}
 
-	canjearPuntos(){
-		this.userBack.canjearPunto().then(info=>{
-			this.comun.showAlert('Mensaje',info)
+	canjearPuntos() {
+		this.userBack.canjearPunto().then(info => {
+			this.comun.showAlert('Mensaje', info)
 		})
+	}
+
+	salir(){
+		firebase.auth().signOut()
 	}
 
 
