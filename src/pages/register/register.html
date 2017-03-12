@@ -4,39 +4,27 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-content padding>
-  <div class="marco-foto" tappable (click)="tomarFoto()">
-    <div class="fondo">
-      <ion-icon name="camera" *ngIf="!foto"></ion-icon>
-      <img [src]="foto" alt="" *ngIf="foto">
+<ion-header no-border>
+    <ion-toolbar color="fondo">
+        <img src="assets/img/logo.png" alt="" class="logo">
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding text-center>
+
+    <span class="titl">Regístrate</span>
+
+    <div class="datos">
+        <div style="position: relative">
+           <ion-datetime displayFormat="DD/MM/YYYY" doneText='ok' [(ngModel)]="fecha" style="padding-left: 0px;"></ion-datetime>
+        </div>
     </div>
-  </div>
 
-  <ion-grid style="margin-top: 4vh;">
-    <ion-row>
-      <ion-col width-100>
-        <ion-input type="text"  onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nombre'" placeholder="Nombre" [(ngModel)]="nombre"></ion-input>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col width-100 style="position: relative">
-        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="fecha" [class.activo]="fecha"></ion-datetime>
-      </ion-col>
-    </ion-row>
-     <ion-row>
-      <ion-col width-100>
-        <ion-input type="tel"  onfocus="this.placeholder = ''" onblur="this.placeholder = 'Cedula'" placeholder="Cedula" [(ngModel)]="cedula"></ion-input>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <ion-grid class="foter" style="padding: 0">
-    <ion-row>
-      <ion-col width-100>
-        <button ion-button full color="redime_blu" (click)="entrar()" class="mibu">Entrar</button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  
 </ion-content>
+
+<ion-footer no-border style="padding: 0 16px;">
+    <ion-toolbar text-center color="fondo">
+        <button ion-button block color="light" style="color: #004160;margin-bottom: 2vh;" (click)="createCount()">Crear mi cuenta</button>
+    </ion-toolbar>
+</ion-footer>

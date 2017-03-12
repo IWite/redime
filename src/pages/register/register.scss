@@ -1,47 +1,74 @@
 page-register {
     .content-ios {
-        background: #00e4a6;
+        background: color($colors, fondo);
     }
     .content-md {
-        background: #00e4a6;
+        background: color($colors, fondo);
     }
-    .marco-foto {
-        width: 22vh;
-        height: 22vh;
-        padding: 4px;
-        background: #ff5d71;
-        border-radius: 50%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 10vh;
+    .logo {
+        width: 70vw;
+        display: block;
+        margin: auto;
+        margin-top: 5vh;
     }
-    .fondo {
-        background: #403434;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
+    .notCount {
         color: white;
-        font-size: 4em;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 3vh 0;
+        display: block;
     }
-    ion-col {
-        padding: 3px;
+    .content-ios {
+        color: white;
     }
-    .foter {
-        margin-top: 21vh;
+    .content-md {
+        color: white;
     }
-    .activo {
-        color: black;
+    .text-input-ios {
+        text-align: center;
     }
-    .mibu {
-        border-radius: 10px ;
-        height: 4.6rem;
+    .text-input-md {
+        text-align: center;
+    }
+    .titl {
+        display: block;
+        font-size: 20px;
+        font-weight: 100;
+        margin-top: 5%;
+    }
+     ::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        color: white !important;
+    }
+     ::-moz-placeholder {
+        /* Firefox 19+ */
+        color: white !important;
+    }
+     :-ms-input-placeholder {
+        /* IE 10+ */
+        color: white !important;
+    }
+     :-moz-placeholder {
+        /* Firefox 18- */
+        color: white !important;
+    }
+    .datos {
+        margin-top: 8%;
+        ion-input {
+            border-bottom: 1px solid;
+        }
+    }
+    .sub {
+        font-size: 0.8em;
+        font-weight: bold;
+        font-style: italic;
+        margin-top: 3vh;
+        display: block;
+    }
+    ion-datetime {
+        background: transparent;
+        color: white;
+        border-bottom: 1px solid;
+        border-radius: 0;
     }
 }

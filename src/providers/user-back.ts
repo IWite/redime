@@ -69,7 +69,9 @@ export class UserBack {
 	crearUsuario(json: DatosUsuario): Promise<null> {
 		return new Promise(data => {
 			this.generarCod(this.user.uid).then((cod) => {
+				debugger
 				json['cod_usr'] = cod
+				debugger
 				this.refUsuario.child(this.user.uid).set(json)
 				data()
 			})
@@ -118,7 +120,7 @@ export class UserBack {
 	 */
 	stringGen(len: number): string {
 		let text = "";
-		let charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#-";
+		let charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-";
 		for (let i = 0; i < len; i++)
 			text += charset.charAt(Math.floor(Math.random() * charset.length));
 		return text;

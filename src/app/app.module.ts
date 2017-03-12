@@ -12,7 +12,8 @@ import { RegisterPage } from '../pages/register/register';
 import { PrincipalPage } from '../pages/principal/principal';
 import { RestaurantesPage } from '../pages/restaurantes/restaurantes';
 import { HomePage } from '../pages/home/home';
-import { HistorialPage } from '../pages/historial/historial'
+import { HistorialPage } from '../pages/historial/historial';
+import { CreateCountPage } from '../pages/create-count/create-count';
 // -----------------------------------------------------------------
 // Providers
 // -----------------------------------------------------------------
@@ -37,7 +38,8 @@ import {QRCodeComponent} from 'ng2-qrcode'
     HomePage,
     QRCodeComponent,
     CodigoComponent,
-    HistorialPage
+    HistorialPage,
+    CreateCountPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -51,7 +53,8 @@ import {QRCodeComponent} from 'ng2-qrcode'
     RestaurantesPage,
     HomePage,
     CodigoComponent,
-    HistorialPage
+    HistorialPage,
+    CreateCountPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, FirebaseService, ComunService, UserBack]
 })

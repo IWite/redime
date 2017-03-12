@@ -106,6 +106,25 @@ export class FirebaseService {
 		return mensaje
 	}
 
+	/**
+	 * return a menssage in spanish of error reset password
+	 * @param {firebase.FirebaseError} error
+	 * @returns {string}
+	 * @memberOf UserBack
+	 */
+	getErrorReset(error: firebase.FirebaseError): string {
+		let mensaje: string
+		if (error.code === 'auth/user-not-found')
+			mensaje = 'No existe un usuario con este correo'
+		else if (error.code == 'auth/invalid-email') {
+			mensaje = 'Correo no valido'
+		}
+		else {
+			mensaje = error.message
+		}
+		return mensaje
+	}
+
 
 	/**
 	 * Update inforamtion user auth

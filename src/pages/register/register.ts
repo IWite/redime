@@ -30,17 +30,9 @@ export class RegisterPage {
     // Atributos
     // -----------------------------------------------------------------
 
-    /** Nombre del usuario */
-    nombre: string
-
     /** fecha del usuario */
     fecha: string
 
-    /** cedula del usuario */
-    cedula: string
-
-    /** url de la foto */
-    foto: string
 
     // -----------------------------------------------------------------
     // Constructor
@@ -52,8 +44,7 @@ export class RegisterPage {
         public comun: ComunService,
         public zone: NgZone,
         public userBack: UserBack) {
-        this.nombre = userBack.user.displayName
-        this.foto = userBack.user.photoURL
+
     }
 
     // -----------------------------------------------------------------
@@ -63,55 +54,32 @@ export class RegisterPage {
         document.getElementsByClassName('datetime-text')[0].innerHTML = 'Fecha nacimiento'
     }
 
-
-    tomarFoto() {
-        this.comun.getImageCamaraOrGalery().then(
-            data => this.zone.run(() => this.foto = data),
-            err => console.log(err)
-        )
-    }
-
-    /**
-   * Finaliza el registro de la aplicación
-   * @memberOf RegisterPage
-   */
-    entrar() {
-        if (!this.nombre || !this.fecha || !this.cedula) {
+    createCount() {
+        debugger
+        if (!this.fecha)
             this.comun.showAlert('Error', 'Debes llenar todos los campos')
-        }
         else {
-
             let loading = this.comun.showLoad('Cargando...')
-            loading.present();
-            let infoUser:DatosUsuario = {
+            loading.present()
+            let infoUser: DatosUsuario = {
                 fecha: this.fecha,
-                cedula: this.cedula,
-                infoPuntos:{
-                    consumo:0,
-                    numAmigos:5,
-                    puntos:0,
-                    puntosRed:0
+                infoPuntos: {
+                    consumo: 0,
+                    numAmigos: 5,
+                    puntos: 0,
+                    puntosRed: 0
                 }
             }
-            this.firebaseService.updateInfoUser(this.nombre, this.foto)
             this.userBack.crearUsuario(infoUser).then(
-                ()=>{
+                () => {
                     loading.dismiss()
                     this.navCtrl.setRoot(HomePage)
                 }
             )
+
         }
     }
 
-    stringGen(len: number): string {
-        let text = "";
 
-        let charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#-";
-
-        for (let i = 0; i < len; i++)
-            text += charset.charAt(Math.floor(Math.random() * charset.length));
-
-        return text;
-    }
 
 }

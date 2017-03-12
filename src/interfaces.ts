@@ -3,7 +3,6 @@
 // -----------------------------------------------------------------
 
 export interface DatosUsuario {
-	cedula: string,
 	cod_usr?: string,
 	fecha: string,
 	hijos?: Object

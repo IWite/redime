@@ -1,4 +1,4 @@
-page-login {
+page-create-count {
     .content-ios {
         background: color($colors, fondo);
     }
@@ -34,9 +34,7 @@ page-login {
         display: block;
         font-size: 20px;
         font-weight: 100;
-        margin-top: 6vh;
-        text-align: center;
-        color: white;
+        margin-top: 5%;
     }
      ::-webkit-input-placeholder {
         /* Chrome/Opera/Safari */
@@ -55,7 +53,7 @@ page-login {
         color: white !important;
     }
     .datos {
-        width: 100%;
+        margin-top: 8%;
         ion-input {
             border-bottom: 1px solid;
         }
@@ -67,10 +65,13 @@ page-login {
         margin-top: 3vh;
         display: block;
     }
-
+    ion-datetime {
+        background: transparent;
+        color: white;
+        border-bottom: 1px solid;
+        border-radius: 0;
+    }
     .scroll-content{
-        display: flex;
-        align-items: center;
         overflow-y: hidden;
     }
 }

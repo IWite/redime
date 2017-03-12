@@ -1,5 +1,5 @@
 <!--
-  Generated template for the Login page.
+  Generated template for the CreateCount page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,25 +7,29 @@
 <ion-header no-border>
     <ion-toolbar color="fondo">
         <img src="assets/img/logo.png" alt="" class="logo">
-        <span class="titl">Ingresa</span>
     </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding text-center>
 
+    <span class="titl">Regístrate</span>
+
     <div class="datos">
+        <ion-input type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nombre'" placeholder="Nombre" [(ngModel)]="nombre"></ion-input>
         <ion-input type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Correo'" placeholder="Correo" [(ngModel)]="email"></ion-input>
         <ion-input type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Contraseña'" placeholder="Contraseña" [(ngModel)]="password"></ion-input>
-        <span class="sub" (click)="recordar()">¿Olvidaste la contraseña?</span>
+        <div style="position: relative">
+           <ion-datetime displayFormat="DD/MM/YYYY" doneText='ok' [(ngModel)]="fecha" style="padding-left: 0px;"></ion-datetime>
+        </div>
     </div>
 
 </ion-content>
 
 <ion-footer no-border style="padding: 0 16px;">
     <ion-toolbar text-center color="fondo">
-        <button ion-button block color="light" style="color: #004160;margin-bottom: 2vh;" (click)="loginEmail()">Ingresar</button>
-        <button ion-button block color="light" outline (click)="loginFacebook()">Ingresa con Facebook</button>
-        <span class="notCount" [navPush]="pushpag">¿No tienes cuenta aún?</span>
+        <button ion-button block color="light" style="color: #004160;margin-bottom: 2vh;" (click)="registerEmail()">Crear mi cuenta</button>
+        <button ion-button block color="light" outline (click)="loginFacebook()">Registrame con Facebook</button>
+        <span class="notCount" navPop>¿Ya tienes cuenta?</span>
     </ion-toolbar>
 </ion-footer>
