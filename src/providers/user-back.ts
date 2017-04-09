@@ -2,7 +2,6 @@
 // Components
 // -----------------------------------------------------------------
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Subject } from 'rxjs/Subject';
 import { DatosUsuario, infoPuntos } from '../interfaces'
@@ -41,7 +40,7 @@ export class UserBack {
 	// -----------------------------------------------------------------
 	// Constructor
 	// -----------------------------------------------------------------
-	constructor(public http: Http) {
+	constructor() {
 		console.log('Hello UserBack Provider');
 	}
 

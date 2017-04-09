@@ -3,6 +3,7 @@
 // -----------------------------------------------------------------
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { BrowserModule } from '@angular/platform-browser';
 // -----------------------------------------------------------------
 // Page
 // -----------------------------------------------------------------
@@ -42,6 +43,7 @@ import {QRCodeComponent} from 'ng2-qrcode'
     CreateCountPage
   ],
   imports: [
+    BrowserModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

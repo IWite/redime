@@ -2,7 +2,6 @@
 // Components
 // -----------------------------------------------------------------
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { DatosUsuario, DatosRestaurante, PorceRestaurante ,HistoricoEmpresa, Empresa, HistoricoUsuario, infoPuntos} from '../interfaces'
 // -----------------------------------------------------------------
@@ -29,7 +28,7 @@ export class HomeBack {
 	// -----------------------------------------------------------------
 	// Constructor
 	// -----------------------------------------------------------------
-	constructor(public http: Http) {
+	constructor() {
 		console.log('Hello HomeBack Provider');
 		this.db = firebase.database()
 	}
