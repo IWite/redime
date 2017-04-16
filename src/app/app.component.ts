@@ -4,7 +4,6 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-import { environment } from './environment';
 // -----------------------------------------------------------------
 // Pages
 // -----------------------------------------------------------------
@@ -20,6 +19,8 @@ import {UserBack} from '../providers/user-back'
 // Libraries
 // -----------------------------------------------------------------
 import * as firebase from 'firebase';
+
+declare const ENV;
 
 
 
@@ -45,7 +46,7 @@ export class MyApp {
 	constructor(public platform: Platform, private userBack : UserBack, private zone: NgZone) {
 		this.initializeApp();
 		// inicializa el servicio de firebase
-		firebase.initializeApp(environment.firebaseConfig)
+		firebase.initializeApp(ENV.data.firebase_config)
 		// Estructura para navegar entre páginas
 		this.pages = [
 			{ title: 'Principal', component: HomePage },

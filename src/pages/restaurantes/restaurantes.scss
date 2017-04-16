@@ -1,3 +1,40 @@
 page-restaurantes {
-
+    .marco {
+        color: #2a607a;
+        display: block;
+        margin-bottom: 3vh;
+        margin-top: 3vh;
+        font-size: 1.2em;
+    }
+    ion-header {
+        border-bottom: 2px solid #00e4a6;
+    }
+    .texto {
+        span {
+            color: #2a607a;
+            display: block;
+        }
+    }
+    .title {
+        font-size: 1.1em;
+        font-weight: bold;
+        width: 100%;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .add {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 2em;
+        color: color($colors, redime_red)
+    }
+    .delet{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        font-size: 2em;
+        color: color($colors, redime_red)
+    }
 }

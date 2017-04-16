@@ -5,16 +5,14 @@
   Ionic pages and navigation.
 -->
 <ion-header no-border>
-    <ion-toolbar color="fondo2">
-
-        <ion-title>Redime</ion-title>
-
+    <ion-navbar color="fondo2" text-center>
+        <ion-title><img src="assets/img/logo_verde.svg" alt=""  style="height: 40px;"></ion-title>
         <ion-buttons end (click)="salir()">
             <button ion-button icon-only>
-        <ion-icon color="redime_red" name="ios-exit-outline"></ion-icon>
-      </button>
+                <ion-icon color="redime_red" name="ios-exit-outline"></ion-icon>
+            </button>
         </ion-buttons>
-    </ion-toolbar>
+    </ion-navbar>
 </ion-header>
 
 
@@ -24,12 +22,7 @@
         <ion-grid>
             <ion-row align-items-center>
                 <ion-col col-5>
-                    <div class="fondolinea" id="fond">
-                        <div class="foto"  text-center>
-                            <img *ngIf="foto" [src]="foto" alt="" style="width: 100%;">
-                            <ion-icon *ngIf="!foto" name="md-person" style="font-size: 7.2em;"></ion-icon>
-                        </div>
-                    </div>
+                    <avatar [opciones]="opt" [srcImage]="foto"></avatar>
                 </ion-col>
                 <ion-col col-7 class="textcont">
                     <span style="font-weight: bold;font-size: 2em;">¡Hola {{nombre}}!</span>

@@ -1,0 +1,7 @@
+<!-- Generated template for the Avatar component -->
+<div class="marco-avatar" #marco>
+  <div class="cont-avatar" >
+    <img *ngIf="srcImage" [src]="srcImage" alt="" style="width: 100%; height: 100%">
+    <ion-icon *ngIf="!srcImage" name="{{opciones.icon}}" [ngStyle]="opciones.iconStyle" ></ion-icon>
+  </div>
+</div>

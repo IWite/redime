@@ -1,0 +1,10 @@
+{
+  "firebase_config": {
+    "apiKey": "AIzaSyA1LW0612NA3SO8Wsg60kFCqOuB1-hVDLY",
+    "authDomain": "redime-dev.firebaseapp.com",
+    "databaseURL": "https://redime-dev.firebaseio.com",
+    "projectId": "redime-dev",
+    "storageBucket": "redime-dev.appspot.com",
+    "messagingSenderId": "422692571227"
+  }
+}

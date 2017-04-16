@@ -28,6 +28,7 @@ export class UserBack {
 
 	datosUsuatio: DatosUsuario
 
+	listaKeyAmigos = []
 	// -----------------------------------------------------------------
 	// Observadores
 	// -----------------------------------------------------------------
@@ -68,9 +69,7 @@ export class UserBack {
 	crearUsuario(json: DatosUsuario): Promise<null> {
 		return new Promise(data => {
 			this.generarCod(this.user.uid).then((cod) => {
-				debugger
 				json['cod_usr'] = cod
-				debugger
 				this.refUsuario.child(this.user.uid).set(json)
 				data()
 			})
@@ -94,7 +93,7 @@ export class UserBack {
 					let cont = 10
 					while (cent) {
 						tam = (cont == 0) ? tam + 1 : tam
-						let cod = 'usr:' + this.stringGen(tam)
+						let cod = this.stringGen(tam)
 						if (!data[cod]) {
 							codigo = cod
 							data[cod] = uid
@@ -181,7 +180,6 @@ export class UserBack {
 						data.puntos += ppunto
 						data.puntosRed -= ppunto
 					}
-
 				}
 				return data
 			}, (a, b, c) => {
@@ -190,6 +188,15 @@ export class UserBack {
 		})
 	}
 
+	borrarAmigo(key: string){
+		firebase.database().ref('usuarios/'+this.user.uid+'/hijos/'+key).remove()
+		firebase.database().ref('usuarios/'+key+'/padre').transaction((data)=>{
+			if(data){
+				data = ''
+			}
+			return data
+		})
+	}
 
 
 }

@@ -40,6 +40,17 @@ export class PrincipalPage {
 	fecha: string
 	codigo: string
 
+	opt = {
+		bordeColor: '2px solid #00e4a6',
+		padding: '2px',
+		size: '15vh',
+		icon: 'md-person',
+		iconStyle: {
+			"align-self":"flex-start",
+			"font-size": "17vh"
+		}
+	}
+
 	constructor(
 		public navCtrl: NavController,
 		public navParams: NavParams,
@@ -82,8 +93,7 @@ export class PrincipalPage {
 	}
 
 	ionViewDidLoad() {
-		let ele = document.getElementById('fond')
-		ele.style.height = ele.offsetWidth + 'px'
+		
 	}
 
 
@@ -158,13 +168,12 @@ export class PrincipalPage {
 	}
 
 	agregar(cod: string) {
-		debugger
 		if (cod == this.userBack.datosUsuatio.cod_usr)
 			this.comun.showAlert('Error', 'Código no valido')
 		else if (this.userBack.datosUsuatio.hijos && Object.keys(this.userBack.datosUsuatio.hijos).length >= this.userBack.datosUsuatio.infoPuntos.numAmigos)
 			this.comun.showAlert('Error', 'No puedes agregar más amigos')
 		else {
-			this.homeBack.agregarAmigo(cod, this.userBack.user.uid).then(
+			this.homeBack.agregarAmigo(cod, this.userBack.user.uid, this.userBack.datosUsuatio.padre).then(
 				hijo => {
 					if (this.userBack.datosUsuatio.padre == hijo) {
 						this.homeBack.borrarReferenciaHijo(hijo)

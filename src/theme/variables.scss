@@ -27,6 +27,13 @@ $button-md-outline-border-width : 2px;
 $button-md-border-radius : 12px;
 $button-ios-border-radius : 12px;
 
+.content-ios {
+        background: #fdfdfd;
+    }
+.content-md {
+    background: #fdfdfd;
+}
+
 
 
 // .tabs {
@@ -115,3 +122,4 @@ $colors: (
 // --------------------------------------------------
 @import "roboto";
 @import "noto-sans";
+@import "../components/avatar/avatar.scss";

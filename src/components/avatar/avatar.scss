@@ -1,0 +1,15 @@
+avatar {
+    .marco-avatar {
+        border-radius: 50%;
+        display: inline-block;
+    }
+    .cont-avatar {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

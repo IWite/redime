@@ -1,0 +1,27 @@
+page-amigos {
+    .marco {
+        color: #2a607a;
+        display: block;
+        margin-bottom: 3vh;
+        margin-top: 3vh;
+        font-size: 1.2em;
+    }
+    ion-header {
+        border-bottom: 2px solid #00e4a6;
+    }
+    .cont1 {
+        border-bottom: 2px solid #00e4a6;
+    }
+    .texto {
+        span {
+            color: #2a607a;
+            display: block;
+        }
+    }
+    .trash {
+        color: red;
+        align-self: flex-end;
+        text-align: right;
+        font-size: 2em;
+    }
+}

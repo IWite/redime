@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { DatosUsuario, DatosRestaurante, PorceRestaurante ,HistoricoEmpresa, Empresa, HistoricoUsuario, infoPuntos} from '../interfaces'
+import { DatosUsuario, DatosRestaurante, PorceRestaurante, HistoricoEmpresa, Empresa, HistoricoUsuario, infoPuntos } from '../interfaces'
 // -----------------------------------------------------------------
 // Libraries
 // -----------------------------------------------------------------
@@ -44,32 +44,61 @@ export class HomeBack {
 		}, "") + "," + p[1];
 	}
 
-	agregarAmigo(cod: string, uid: string): Promise<string> {
+	verificacionPadreagregar(padre, key) {
+		return new Promise((data, err) => {
+			if (padre == '')
+				data()
+			else if (padre == key)
+				err()
+			else
+				this.refUsuarios.child(padre).child('padre').transaction(data => {
+					if (data) {
+						this.verificacionPadreagregar(data, key).then(
+							res => data(),
+							nor => err()
+						)
+					}
+					return data
+
+				})
+		})
+	}
+
+	agregarAmigo(cod: string, uid: string, padre: string): Promise<string> {
 		return new Promise((ok, err) => {
 			this.refCodigos.child(cod).once('value', snap => {
 				let idUs = snap.val()
 				if (!idUs)
 					err('Código no valido')
 				else {
-					let cond
-					this.refUsuarios.child(idUs).transaction(
-						(datos: DatosUsuario) => {
-							if (datos) {
-								if (datos.padre)
-									cond = 0
-								else {
-									datos.padre = uid
-									cond = 1
-								}
-							}
-							return datos
+
+					this.verificacionPadreagregar(padre, cod).then(
+						t1 => {
+							let cond
+							this.refUsuarios.child(idUs + '/padre').transaction(
+								(datos: string) => {
+									if (datos != null) {
+										if (datos != '')
+											cond = 0
+										else {
+											datos = uid
+											cond = 1
+										}
+									}
+									return datos
+								},
+								(a, b, c) => {
+									if (cond == 0)
+										err('El usuario ya tiene un padre')
+									else
+										ok(idUs)
+								})
 						},
-						(a, b, c) => {
-							if (cond == 0)
-								err('El usuario ya tiene un padre')
-							else
-								ok(idUs)
-						})
+						fail => err('No puedes agregar a un padre tuyo')
+					)
+
+
+
 				}
 			})
 		})
@@ -88,8 +117,8 @@ export class HomeBack {
 		this.refUsuarios.child(id + '/hijos').update(hijos)
 	}
 
-	agregarCompra(valor:number, rest: PorceRestaurante, padre: string, nombreRestaurante:string) {
-		
+	agregarCompra(valor: number, rest: PorceRestaurante, padre: string, nombreRestaurante: string) {
+
 		let precioBase = valor * rest.porcentajeCompra
 
 		let valorUsuario = precioBase * rest.porcentajeRed
@@ -99,28 +128,28 @@ export class HomeBack {
 		let gananciaBase = valorUsuario * rest.porcentajeBase
 
 		let donacionRed = valorUsuario - gananciaBase
-		
+
 		let user = firebase.auth().currentUser;
 
 		let date = new Date()
 
-		let fech = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()
+		let fech = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
 
 		let fecha = date.getTime()
 
 		// -----------------------------------------------------------------
 		// Actualizacion usuario
 		// -----------------------------------------------------------------
-		firebase.database().ref('usuarios/'+user.uid+'/infoPuntos').transaction((data:infoPuntos)=>{
-			if(data){
+		firebase.database().ref('usuarios/' + user.uid + '/infoPuntos').transaction((data: infoPuntos) => {
+			if (data) {
 				data.puntos += gananciaBase
 				data.consumo += valor
-				if(!data.historico)
+				if (!data.historico)
 					data.historico = {}
 				data.historico[fecha] = {
 					fecha: fech,
 					ganancia: gananciaBase,
-					restaurante : nombreRestaurante,
+					restaurante: nombreRestaurante,
 					tipo: 'CONSUMO',
 					valor: valor
 
@@ -132,9 +161,9 @@ export class HomeBack {
 		// -----------------------------------------------------------------
 		// Actualizacion restaurranro
 		// -----------------------------------------------------------------
-		firebase.database().ref('restaurante/'+nombreRestaurante).transaction((dat:DatosRestaurante)=>{
-			if(dat){
-				if(!dat.historico)
+		firebase.database().ref('restaurante/' + nombreRestaurante).transaction((dat: DatosRestaurante) => {
+			if (dat) {
+				if (!dat.historico)
 					dat.historico = {}
 				dat.historico[fecha] = {
 					compra: valor,
@@ -150,19 +179,19 @@ export class HomeBack {
 		// -----------------------------------------------------------------
 		// Actualizacion empresa
 		// -----------------------------------------------------------------
-		firebase.database().ref('empresa').transaction((data: Empresa)=>{
-			if(data){
-				if(!data.historico)
+		firebase.database().ref('empresa').transaction((data: Empresa) => {
+			if (data) {
+				if (!data.historico)
 					data.historico = {}
-				data.historico[fecha]  = {
+				data.historico[fecha] = {
 					fecha: fech,
 					ganancia: gananciaEmpresa,
 					restaurante: nombreRestaurante,
-					tipo : 'COBRO',
+					tipo: 'COBRO',
 					valor: precioBase
 				}
 				data.pago += gananciaEmpresa
-			}	
+			}
 			return data
 		})
 
@@ -176,28 +205,27 @@ export class HomeBack {
 			let nPuntos = puntos * 0.5
 			let cond = false
 			let npadre = ''
-			firebase.database().ref('usuarios/' + id ).transaction(
-				(data:DatosUsuario) => {
+			firebase.database().ref('usuarios/' + id).transaction(
+				(data: DatosUsuario) => {
 					if (data) {
 						data.infoPuntos.puntosRed += nPuntos
-						if(data.padre){
+						if (data.padre) {
 							cond = true
 							npadre = data.padre
 						}
 					}
 					return data
 				},
-				(a,b,c)=>{
-					if(cond)
-						this.puntosRed(nPuntos,npadre).then(da=>{
+				(a, b, c) => {
+					if (cond)
+						this.puntosRed(nPuntos, npadre).then(da => {
 							data()
 						})
-					else{
+					else {
 						data()
 					}
 				})
 		})
-
 	}
 
 

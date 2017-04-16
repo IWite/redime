@@ -20,10 +20,12 @@
     "@angular/http": "4.0.0",
     "@angular/platform-browser": "4.0.0",
     "@angular/platform-browser-dynamic": "4.0.0",
+    "@ionic-native/barcode-scanner": "^3.4.4",
     "@ionic-native/core": "3.4.2",
     "@ionic-native/splash-screen": "3.4.2",
     "@ionic-native/status-bar": "3.4.2",
     "@ionic/storage": "2.0.1",
+    "@types/underscore": "^1.8.0",
     "firebase": "^3.6.9",
     "ionic-angular": "3.0.1",
     "ionic-native": "2.4.1",
@@ -31,6 +33,7 @@
     "ng2-qrcode": "^0.1.1",
     "rxjs": "5.1.1",
     "sw-toolbox": "3.4.0",
+    "underscore": "^1.8.3",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
@@ -56,5 +59,8 @@
       "locator": "ios"
     }
   ],
-  "description": "base: An Ionic project"
+  "description": "base: An Ionic project",
+  "config": {
+    "ionic_webpack": "./config/webpack.config.js"
+  }
 }

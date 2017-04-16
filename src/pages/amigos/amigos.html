@@ -1,0 +1,41 @@
+<!--
+  Generated template for the Amigos page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border text-center style="background: #fdfdfd;">
+
+  <ion-navbar text-center color="fondo2">
+    <ion-title><img src="assets/img/logo_verde.svg" alt=""  style="height: 40px;"></ion-title>
+  </ion-navbar>
+
+  <span class="marco">MI RED</span>
+</ion-header>
+
+
+<ion-content>
+  <div padding class="cont1" *ngFor="let item of listaAmigos">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <avatar [opciones]="opt" [srcImage]="item.photo"></avatar>
+        </ion-col>
+        <ion-col col-7>
+          <div class="texto">
+            <span style="font-size: 1.3em;font-weight: bold;">{{item.nombre}}</span>
+            <span>{{item.amig}} <span *ngIf="item.amig == 1" style="display: inline-block">amigo</span> <span style="display: inline-block" *ngIf="item.amig > 1 || item.amig==0">amigos</span>   </span>
+            <span>{{item.pnts}} puntos</span>
+          </div>
+        </ion-col>
+        <ion-col col-2 class="trash" (click)="delet(item.key)">
+          <ion-icon name="ios-trash-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+<ion-footer padding>
+  <button ion-button block outline color="redime_gre" (click)="opcionAgregar()">AGREGAR</button>
+</ion-footer>

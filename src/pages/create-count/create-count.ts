@@ -73,6 +73,8 @@ export class CreateCountPage {
           this.firebaseService.updateInfoUser(this.nombre, '')
           let infoUser: DatosUsuario = {
             fecha: this.fecha,
+            padre:'',
+            nombre: this.nombre,
             infoPuntos: {
               consumo: 0,
               numAmigos: 5,

@@ -6,8 +6,11 @@ export interface DatosUsuario {
 	cod_usr?: string,
 	fecha: string,
 	hijos?: Object
-	padre?: string,
-	infoPuntos: infoPuntos
+	padre: string,
+	foto?: string,
+	nombre: string
+	infoPuntos: infoPuntos,
+	numAmigos?: number
 }
 
 export interface infoPuntos {
@@ -49,9 +52,9 @@ export interface HistoricoRestaurante {
 }
 
 export interface PorceRestaurante {
-	porcentajeBase: number,
-	porcentajeRed: number,
-	porcentajeCompra: number,
+	porcentajeBase: number, // porcentaje ganancia base del usuario
+	porcentajeRed: number, // Porcentaje para la red y el restante para redime
+	porcentajeCompra: number, // Porcentaje de compra del usuario en el restaurante
 }
 
 

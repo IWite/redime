@@ -55,7 +55,6 @@ export class RegisterPage {
     }
 
     createCount() {
-        debugger
         if (!this.fecha)
             this.comun.showAlert('Error', 'Debes llenar todos los campos')
         else {
@@ -63,6 +62,9 @@ export class RegisterPage {
             loading.present()
             let infoUser: DatosUsuario = {
                 fecha: this.fecha,
+                padre:'',
+                foto: this.userBack.user.photoURL,
+                nombre: this.userBack.user.displayName,
                 infoPuntos: {
                     consumo: 0,
                     numAmigos: 5,
