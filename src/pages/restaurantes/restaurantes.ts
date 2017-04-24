@@ -1,5 +1,12 @@
+// -----------------------------------------------------------------
+// Components
+// -----------------------------------------------------------------
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+// -----------------------------------------------------------------
+// Libraries
+// -----------------------------------------------------------------
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -22,8 +29,13 @@ export class RestaurantesPage {
   hMap = 180
   idr: string
 
+  listaRestaurantes = []
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.wMap = window.innerWidth -32
+    firebase.database().ref('restaurante').on('child_added',snap=>{
+      this.listaRestaurantes.push(snap.val())
+    })
   }
 
   ionViewDidLoad() {

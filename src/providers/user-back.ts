@@ -9,6 +9,7 @@ import { DatosUsuario, infoPuntos } from '../interfaces'
 // Libraries
 // -----------------------------------------------------------------
 import * as firebase from 'firebase';
+import { Geolocation } from '@ionic-native/geolocation';
 
 
 
@@ -41,7 +42,7 @@ export class UserBack {
 	// -----------------------------------------------------------------
 	// Constructor
 	// -----------------------------------------------------------------
-	constructor() {
+	constructor(private geolocation: Geolocation) {
 		console.log('Hello UserBack Provider');
 	}
 

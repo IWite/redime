@@ -9,6 +9,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ComunService } from "../../providers/comun-service";
 import { UserBack } from "../../providers/user-back";
 import { HomeBack } from "../../providers/home-back";
+import { AmigosService } from "../../providers/amigos-service";
 // -----------------------------------------------------------------
 // Libraries
 // -----------------------------------------------------------------
@@ -21,6 +22,7 @@ import { DatosUsuario } from "../../interfaces";
 @Component({
 	selector: 'page-amigos',
 	templateUrl: 'amigos.html',
+	providers: [AmigosService]
 })
 export class Amigos {
 	// -----------------------------------------------------------------
@@ -38,15 +40,15 @@ export class Amigos {
 		size: '10vh',
 		icon: 'md-person',
 		iconStyle: {
-			"align-self":"flex-start",
-			"font-size": "17vh"
+			"align-self": "flex-start",
+			"font-size": "12vh"
 		}
 	}
 
 	// -----------------------------------------------------------------
 	// Constructor
 	// -----------------------------------------------------------------
-	constructor(public navCtrl: NavController, public navParams: NavParams, private comun: ComunService, private userBack: UserBack, private homeBack: HomeBack, private barcodeScanner: BarcodeScanner) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, private comun: ComunService, private userBack: UserBack, private homeBack: HomeBack, private barcodeScanner: BarcodeScanner, private amigosService: AmigosService) {
 		this.cargarAmigos()
 	}
 
@@ -155,23 +157,35 @@ export class Amigos {
 	 * @memberOf Amigos
 	 */
 	agregar(cod: string) {
+		debugger
 		if (cod == this.userBack.datosUsuatio.cod_usr)
 			this.comun.showAlert('Error', 'Código no valido')
-		else if (this.userBack.datosUsuatio.hijos && Object.keys(this.userBack.datosUsuatio.hijos).length >= this.userBack.datosUsuatio.numAmigos)
-			this.comun.showAlert('Error', 'No puedes agregar más amigos')
 		else {
-			this.homeBack.agregarAmigo(cod, this.userBack.user.uid, this.userBack.datosUsuatio.padre).then(
-				hijo => {
-					if (this.userBack.datosUsuatio.padre == hijo) {
-						this.homeBack.borrarReferenciaHijo(hijo)
-						this.comun.showAlert('Error', 'No se pudo agregar su hijo')
-					}
-					else
-						this.validarUsuario(hijo)
+			this.amigosService.validarCodigo(cod).then(
+				data => {
+					this.amigosService.verificacionPadreagregar(this.userBack.datosUsuatio.padre,data).then(
+						data2 =>{
+							if(Object(this.userBack.datosUsuatio.hijos).length == this.userBack.datosUsuatio.infoPuntos.numAmigos)
+								err2 => this.comun.showAlert('Error', 'No puedes agregar más amigos')
+							else if(this.userBack.datosUsuatio.hijos && this.userBack.datosUsuatio.hijos[data]){
+								this.comun.showAlert('Error', 'El usuario ya esta en tu red')
+							}
+							else{
+								this.amigosService.agregarReferenciaPadre(data,this.userBack.user.uid).then(
+									data3=>{
+										if (!this.userBack.datosUsuatio.hijos)
+											this.userBack.datosUsuatio.hijos = {}
+										this.userBack.datosUsuatio.hijos[data] = true
+										firebase.database().ref('usuarios/'+this.userBack.user.uid+'/hijos').update(this.userBack.datosUsuatio.hijos)
+									},
+									err3=> this.comun.showAlert('Error', 'El usuario ya tiene un padre')
+								)
+							}
+						},
+						err2 => this.comun.showAlert('Error', 'No puedes agregar a un usuario que ya esta en tu red')
+					)
 				},
-				err => {
-					this.comun.showAlert('Error', err)
-				}
+				err => this.comun.showAlert('Error', 'Código no valido')
 			)
 		}
 	}
