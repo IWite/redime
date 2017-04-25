@@ -31,7 +31,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 // -----------------------------------------------------------------
 import {CodigoComponent} from'../components/codigo/codigo'
 import { Avatar } from "../components/avatar/avatar";
-import {QRCodeComponent} from 'ng2-qrcode'
+import { QRCodeModule } from 'angular2-qrcode';
 import { Geolocation } from '@ionic-native/geolocation';
 
 
@@ -44,7 +44,6 @@ import { Geolocation } from '@ionic-native/geolocation';
     PrincipalPage,
     RestaurantesPage,
     HomePage,
-    QRCodeComponent,
     CodigoComponent,
     HistorialPage,
     CreateCountPage,
@@ -53,6 +52,7 @@ import { Geolocation } from '@ionic-native/geolocation';
   ],
   imports: [
     BrowserModule,
+    QRCodeModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

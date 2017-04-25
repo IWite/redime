@@ -16,9 +16,10 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content padding>
-
-    <qrcode [qrdata]="codigo" [size]="100" [level]="'M'" usesvg=true></qrcode>
+<ion-content>
+    <div class="cont">
+        <qr-code [value]="codigo" [size]="500" [level]="'M'" usesvg=true></qr-code>
+    </div>
     <div style="text-align: center;font-size: 3em;position: absolute;width: 100%;bottom: 2vh;">
         <span>{{codigo}}</span>
     </div>

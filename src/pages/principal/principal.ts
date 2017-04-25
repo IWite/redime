@@ -14,7 +14,7 @@ import { HomeBack } from '../../providers/home-back'
 // -----------------------------------------------------------------
 // Libraries
 // -----------------------------------------------------------------
-import { QRCodeComponent } from 'ng2-qrcode'
+import {QRCodeComponent} from 'angular2-qrcode';
 import { CodigoComponent } from '../../components/codigo/codigo'
 import { BarcodeScanner } from 'ionic-native';
 import * as firebase from 'firebase';

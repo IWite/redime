@@ -28,6 +28,7 @@
     "@ionic-native/status-bar": "3.4.2",
     "@ionic/storage": "2.0.1",
     "@types/underscore": "^1.8.0",
+    "angular2-qrcode": "^2.0.1",
     "firebase": "^3.6.9",
     "ionic-angular": "3.0.1",
     "ionic-native": "2.4.1",
