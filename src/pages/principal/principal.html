@@ -6,7 +6,7 @@
 -->
 <ion-header no-border>
     <ion-navbar color="fondo2" text-center>
-        <ion-title><img src="assets/img/logo_verde.svg" alt=""  style="height: 40px;"></ion-title>
+        <ion-title><img src="assets/img/logo_verde.svg" alt="" style="height: 40px;"></ion-title>
         <ion-buttons end (click)="salir()">
             <button ion-button icon-only>
                 <ion-icon color="redime_red" name="ios-exit-outline"></ion-icon>
@@ -20,15 +20,16 @@
 
     <div class="info">
         <ion-grid>
-            <ion-row align-items-center>
-                <ion-col col-5>
+            <ion-row align-items-start>
+                <ion-col col-5 text-center>
                     <avatar [opciones]="opt" [srcImage]="foto"></avatar>
                 </ion-col>
                 <ion-col col-7 class="textcont">
-                    <span style="font-weight: bold;font-size: 2em;">¡Hola {{nombre}}!</span>
-                    <span>{{email}}</span>
-                    <span>{{fecha}}</span>
-
+                    <span style="font-weight: bold;font-size: 2em">¡Hola {{nombre}}!</span>
+                    <div style="margin-top: 8px;">
+                        <span >Tu código:</span>
+                        <span style="font-size: 1.5em;font-weight: bold;">{{codigo}} <ion-icon name="md-copy"></ion-icon></span>
+                    </div>
                 </ion-col>
             </ion-row>
         </ion-grid>
@@ -49,9 +50,9 @@
     <span>Tu código</span>
     <ion-toolbar color="fondo2" style="padding-top: 3vh; border-top: 1px solid #00e4a6" (click)="modal()">
         <div class="cod">
-             <qr-code [value]="codigo" [size]="100" [level]="'M'"></qr-code>
+            <qr-code [value]="codigo" [size]="100" [level]="'M'"></qr-code>
         </div>
         <span style="font-size: 1.5em; font-weight: bold">{{codigo}}</span>
-      
+
     </ion-toolbar>
 </ion-footer>

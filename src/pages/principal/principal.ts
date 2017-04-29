@@ -84,7 +84,7 @@ export class PrincipalPage {
 		this.userBack.darPuntosRed()
 		this.userBack.darPuntos()
 
-		this.nombre = this.userBack.user.displayName
+		this.nombre = this.userBack.user.displayName.split(' ')[0]
 		this.foto = this.userBack.user.photoURL
 		this.email = this.userBack.user.email
 		this.fecha = this.userBack.datosUsuatio.fecha

@@ -102,4 +102,5 @@
         <variable name="NSLOCATIONWHENINUSEUSAGEDESCRIPTION" value="Show your location on the map" />
         <variable name="NSLOCATIONALWAYSUSAGEDESCRIPTION" value="Trace your location on the map" />
     </plugin>
+    <plugin name="com.verso.cordova.clipboard" spec="https://github.com/VersoSolutions/CordovaClipboard.git" />
 </widget>
