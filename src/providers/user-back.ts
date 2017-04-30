@@ -30,6 +30,8 @@ export class UserBack {
 	datosUsuatio: DatosUsuario
 
 	listaKeyAmigos = []
+
+	listaKeyRes = []
 	// -----------------------------------------------------------------
 	// Observadores
 	// -----------------------------------------------------------------
@@ -59,6 +61,13 @@ export class UserBack {
 		this.user = pUser
 		this.refUsuario = firebase.database().ref('usuarios/')
 		this.cargarDatosUsuario()
+		this.keyRest()
+	}
+
+	keyRest(){
+		firebase.database().ref('cod_res').on('value',snap=>{
+			this.listaKeyRes = snap.val()
+		})
 	}
 
 	/**

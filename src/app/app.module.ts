@@ -33,6 +33,7 @@ import {CodigoComponent} from'../components/codigo/codigo'
 import { Avatar } from "../components/avatar/avatar";
 import { QRCodeModule } from 'angular2-qrcode';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Clipboard } from '@ionic-native/clipboard';
 
 
 
@@ -68,6 +69,11 @@ import { Geolocation } from '@ionic-native/geolocation';
     CreateCountPage,
     Amigos
   ],
-  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Geolocation,FirebaseService, ComunService, UserBack,BarcodeScanner]
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, 
+  Geolocation,
+  Clipboard,
+  FirebaseService, 
+  ComunService, 
+  UserBack,BarcodeScanner]
 })
 export class AppModule { }

@@ -36,6 +36,24 @@ $button-ios-border-radius : 12px;
 
 
 
+.tabs-ios-blanco .tab-button[aria-selected=true], .tabs-ios-blanco .tab-button[aria-selected=true] .tab-button-icon{
+    color: #004160 !important;
+}
+
+
+.tabs-ios-blanco .tab-button, .tabs-ios-blanco .tab-button-icon, .tabs-ios-blanco .tab-button:hover:not(.disable-hover), .tabs-ios-blanco .tab-button:hover:not(.disable-hover) .tab-button-icon{
+    color: #004160 !important;
+}
+
+.tabs-md-blanco .tab-button[aria-selected=true], .tabs-md-blanco .tab-button[aria-selected=true] .tab-button-icon{
+    color: #004160 !important;
+}
+
+
+.tabs-md-blanco .tab-button, .tabs-md-blanco .tab-button-icon, .tabs-md-blanco .tab-button:hover:not(.disable-hover), .tabs-md-blanco .tab-button:hover:not(.disable-hover) .tab-button-icon{
+    color: #004160 !important;
+}
+
 // .tabs {
 //     .ion-ios-icon1:before {
 //         content: "b";
