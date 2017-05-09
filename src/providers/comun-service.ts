@@ -70,10 +70,11 @@ export class ComunService {
                 sourceType: Camera.PictureSourceType.CAMERA,
                 destinationType: Camera.DestinationType.DATA_URL,
                 quality: 100,
-                targetWidth: 1000,
-                targetHeight: 1000,
+                targetWidth: 100,
+                targetHeight: 100,
                 encodingType: Camera.EncodingType.JPEG,
-                correctOrientation: true
+                correctOrientation: true,
+                allowEdit: true
             }
             Camera.getPicture(cameraOptions).then((imageData) => {
                 let base64Image = 'data:image/jpeg;base64,' + imageData;
@@ -145,10 +146,11 @@ export class ComunService {
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                 destinationType: Camera.DestinationType.DATA_URL,
                 quality: 100,
-                targetWidth: 1000,
-                targetHeight: 1000,
+                targetWidth: 100,
+                targetHeight: 100,
                 encodingType: Camera.EncodingType.JPEG,
-                correctOrientation: true
+                correctOrientation: true,
+                allowEdit: true
             }
             Camera.getPicture(cameraOptions).then((imageData) => {
                 let base64Image = 'data:image/jpeg;base64,' + imageData;

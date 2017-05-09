@@ -1,5 +1,10 @@
 page-register {
-    .datetime-placeholder{
+    .scroll-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .datetime-placeholder {
         color: red;
     }
     .content-ios {
@@ -9,7 +14,7 @@ page-register {
         background: color($colors, fondo);
     }
     .logo {
-        width: 70vw;
+        width: 85vw;
         display: block;
         margin: auto;
         margin-top: 5vh;
@@ -38,6 +43,8 @@ page-register {
         font-size: 20px;
         font-weight: 100;
         margin-top: 5%;
+        font-weight: 300;
+        color: white;
     }
      ::-webkit-input-placeholder {
         /* Chrome/Opera/Safari */

@@ -111,8 +111,9 @@ export class PrincipalPage {
 		this.nombre = this.userBack.user.displayName.split(' ')[0]
 		this.foto = this.userBack.user.photoURL
 		this.email = this.userBack.user.email
-		this.fecha = this.userBack.datosUsuatio.fecha
 		this.codigo = this.userBack.datosUsuatio.cod_usr
+
+		this.userBack.load.dismiss()
 
 	}
 

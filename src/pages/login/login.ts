@@ -82,8 +82,12 @@ export class LoginPage {
 	}
 
 	loginFacebook() {
+		this.userBack.load.present()
 		this.firebaseService.signInFacebook().catch(
-			err => console.log(err)
+			err => {
+				console.log(err)
+				this.userBack.load.dismiss()
+			}
 		)
 	}
 

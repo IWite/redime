@@ -6,7 +6,7 @@ page-login {
         background: color($colors, fondo);
     }
     .logo {
-        width: 70vw;
+        width: 85vw;
         display: block;
         margin: auto;
         margin-top: 5vh;
@@ -37,6 +37,7 @@ page-login {
         margin-top: 6vh;
         text-align: center;
         color: white;
+        font-weight: 300;
     }
      ::-webkit-input-placeholder {
         /* Chrome/Opera/Safari */

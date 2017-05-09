@@ -4,7 +4,6 @@
 
 export interface DatosUsuario {
 	cod_usr?: string,
-	fecha: string,
 	hijos?: Object
 	padre: string,
 	foto?: string,

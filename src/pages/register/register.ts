@@ -30,8 +30,20 @@ export class RegisterPage {
     // Atributos
     // -----------------------------------------------------------------
 
-    /** fecha del usuario */
-    fecha: string
+    opt = {
+        bordeColor: '2px solid #00e4a6',
+        padding: '4px',
+        size: '20vh',
+        icon: 'ios-camera-outline',
+        iconStyle: {
+            "font-size": "17vh",
+            "color": "#004160",
+        }
+    }
+
+    foto: any
+
+    baseImage: string
 
 
     // -----------------------------------------------------------------
@@ -45,6 +57,11 @@ export class RegisterPage {
         public zone: NgZone,
         public userBack: UserBack) {
 
+        this.userBack.load.dismiss()
+        this.userBack.load = this.comun.showLoad('Cargando')
+        if (this.userBack.user.photoURL != '')
+            this.foto = this.userBack.user.photoURL
+
     }
 
     // -----------------------------------------------------------------
@@ -55,31 +72,59 @@ export class RegisterPage {
     }
 
     createCount() {
-        if (!this.fecha)
-            this.comun.showAlert('Error', 'Debes llenar todos los campos')
-        else {
-            let loading = this.comun.showLoad('Cargando...')
-            loading.present()
-            let infoUser: DatosUsuario = {
-                fecha: this.fecha,
-                padre:'',
-                foto: this.userBack.user.photoURL,
-                nombre: this.userBack.user.displayName,
-                infoPuntos: {
-                    consumo: 0,
-                    numAmigos: 5,
-                    puntos: 0,
-                    puntosRed: 0
-                }
+        let infoUser: DatosUsuario = {
+            padre: '',
+            foto: this.userBack.user.photoURL,
+            nombre: this.userBack.user.displayName,
+            infoPuntos: {
+                consumo: 0,
+                numAmigos: 5,
+                puntos: 0,
+                puntosRed: 0
             }
-            this.userBack.crearUsuario(infoUser).then(
-                () => {
-                    loading.dismiss()
-                    this.navCtrl.setRoot(HomePage)
+        }
+        this.userBack.crearUsuario(infoUser).then(
+            () => {
+                this.navCtrl.setRoot(HomePage)
+            }
+        )
+    }
+
+    tomarFoto() {
+        this.comun.getImageCamaraOrGalery().then(
+            data => {
+                this.baseImage = data,
+                    this.foto = data
+            },
+            err => console.log(err)
+        )
+    }
+
+    registrar() {
+        this.userBack.load.present()
+        if (this.baseImage) {
+            let storageRef = firebase.storage().ref();
+            let bold = this.comun.dataURItoBlob(this.baseImage)
+            let uploadTask = storageRef.child(this.userBack.user.uid + '.jpg').put(bold);
+            uploadTask.on('state_changed',
+                snapshot => {
+                    let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                },
+                err=>{
+                    this.userBack.load.dismiss()
+                    this.comun.showAlert('Error',err.message)
+                },
+                ()=>{
+                    let downloadURL = uploadTask.snapshot.downloadURL;
+                    this.firebaseService.updateInfoUser(this.userBack.user.displayName,downloadURL).then(
+                        ()=>  this.createCount()
+                    )
                 }
             )
-
         }
+        else
+            this.createCount()
     }
 
 

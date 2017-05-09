@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Subject } from 'rxjs/Subject';
 import { DatosUsuario, infoPuntos } from '../interfaces'
+import { Loading } from 'ionic-angular';
 // -----------------------------------------------------------------
 // Libraries
 // -----------------------------------------------------------------
@@ -32,6 +33,8 @@ export class UserBack {
 	listaKeyAmigos = []
 
 	listaKeyRes = []
+
+	load: Loading
 	// -----------------------------------------------------------------
 	// Observadores
 	// -----------------------------------------------------------------

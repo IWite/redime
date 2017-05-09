@@ -35,8 +35,6 @@ export class CreateCountPage {
 
   password: string
 
-  fecha: string
-
   // -----------------------------------------------------------------
   // Constructor
   // -----------------------------------------------------------------
@@ -63,35 +61,16 @@ export class CreateCountPage {
 	 * @memberOf LoginPage
 	 */
   registerEmail() {
-    if (!this.email || !this.password || !this.nombre || !this.fecha)
+    if (!this.email || !this.password || !this.nombre)
       this.comun.showAlert('Error', 'Debes llenar todos los campos')
     else {
-      let loading = this.comun.showLoad('Cargando...')
-      loading.present()
+      this.userBack.load.present()
       this.firebaseService.registerEmail(this.email, this.password).then(
         user => {
           this.firebaseService.updateInfoUser(this.nombre, '')
-          let infoUser: DatosUsuario = {
-            fecha: this.fecha,
-            padre:'',
-            nombre: this.nombre,
-            infoPuntos: {
-              consumo: 0,
-              numAmigos: 5,
-              puntos: 0,
-              puntosRed: 0
-            }
-          }
-          this.userBack.crearUsuario(infoUser).then(
-            () => {
-              loading.dismiss()
-              this.navCtrl.setRoot(HomePage)
-            }
-          )
-
         },
         err => {
-          loading.dismiss()
+          this.userBack.load.dismiss()
           this.comun.showAlert('Erros', err)
         }
       )

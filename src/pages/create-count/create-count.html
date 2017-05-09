@@ -6,7 +6,7 @@
 -->
 <ion-header no-border>
     <ion-toolbar color="fondo">
-        <img src="assets/img/logo.png" alt="" class="logo">
+        <img src="assets/img/milogo.svg" alt="" class="logo">
     </ion-toolbar>
 </ion-header>
 
@@ -19,9 +19,6 @@
         <ion-input type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nombre'" placeholder="Nombre" [(ngModel)]="nombre"></ion-input>
         <ion-input type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Correo'" placeholder="Correo" [(ngModel)]="email"></ion-input>
         <ion-input type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Contraseña'" placeholder="Contraseña" [(ngModel)]="password"></ion-input>
-        <div style="position: relative">
-           <ion-datetime displayFormat="DD/MM/YYYY" doneText='ok' [(ngModel)]="fecha" style="padding-left: 0px;"></ion-datetime>
-        </div>
     </div>
 
 </ion-content>

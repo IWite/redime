@@ -15,6 +15,7 @@ import { HistorialPage } from '../pages/historial/historial'
 // Providers
 // -----------------------------------------------------------------
 import {UserBack} from '../providers/user-back'
+import { ComunService } from "../providers/comun-service";
 // -----------------------------------------------------------------
 // Libraries
 // -----------------------------------------------------------------
@@ -43,7 +44,7 @@ export class MyApp {
 	// -----------------------------------------------------------------
 	// Atributos
 	// -----------------------------------------------------------------
-	constructor(public platform: Platform, private userBack : UserBack, private zone: NgZone) {
+	constructor(public platform: Platform, private userBack : UserBack, private zone: NgZone, private comun: ComunService) {
 		this.initializeApp();
 		// inicializa el servicio de firebase
 		firebase.initializeApp(ENV.data.firebase_config)
@@ -66,7 +67,7 @@ export class MyApp {
 	initializeApp() {
 		this.platform.ready().then(() => {
 			StatusBar.styleDefault();
-			Splashscreen.hide();
+			this.userBack.load = this.comun.showLoad('Cargando...')
 			this.userSatate()
 		});
 	}
@@ -98,6 +99,7 @@ export class MyApp {
 	userSatate() {
 		firebase.auth().onAuthStateChanged(((user: firebase.User) => {
 			if(user){
+				Splashscreen.hide();
 				this.userBack.iniciar(user)
 				firebase.database().ref('usuarios/' + user.uid + '/').once('value',snap=>{
 					if(snap.val()){
