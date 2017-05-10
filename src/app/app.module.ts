@@ -34,6 +34,7 @@ import { Avatar } from "../components/avatar/avatar";
 import { QRCodeModule } from 'angular2-qrcode';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Clipboard } from '@ionic-native/clipboard';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 
 
@@ -72,6 +73,7 @@ import { Clipboard } from '@ionic-native/clipboard';
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, 
   Geolocation,
   Clipboard,
+  LaunchNavigator,
   FirebaseService, 
   ComunService, 
   UserBack,BarcodeScanner]
