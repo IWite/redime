@@ -40,7 +40,7 @@
     </div>
     <div class="cont2">
         <div class="puntos">
-            <span style="display: block">Tu RediCash: <span class="pts">{{puntos}}</span></span>
+            <span style="display: block">Tu RediCash: <span class="pts">{{puntos | number:'1.0-0'}}</span></span>
             <span style="display: block">Tu comunidad: <span class="pts">{{arbol}}</span> </span>
             <button ion-button outline block color="blanco" (click)="canjearPuntos()">Transferir puntos red</button>
         </div>

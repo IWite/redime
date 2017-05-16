@@ -5,7 +5,8 @@ import { Component, NgZone, } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
-import { ToastController } from 'ionic-angular';
+import { ToastController, LoadingController } from 'ionic-angular';
+import { Camera } from 'ionic-native';
 // -----------------------------------------------------------------
 // Providers
 // -----------------------------------------------------------------
@@ -87,7 +88,8 @@ export class PrincipalPage {
 		private homeBack: HomeBack,
 		private clipboard: Clipboard,
 		public toastCtrl: ToastController,
-		private barcodeScanner: BarcodeScanner
+		private barcodeScanner: BarcodeScanner,
+		public loadingCtrl: LoadingController
 	) {
 
 		// -----------------------------------------------------------------
@@ -144,20 +146,53 @@ export class PrincipalPage {
 	}
 
 	escan() {
-		this.comun.takePhoto().then(
-			data => {
-				let load = this.comun.showLoad('Cargando...')
-				load.present()
-				let user = firebase.auth().currentUser
-				firebase.database().ref('facturas').push({
-					user: user.uid,
-					photo: data
-				}, (a) => {
-					load.dismiss()
-					this.comun.showAlert('Gracias', 'El equipo de redime validará tu factura y muy pronto sumaremos tus puntos')
-				})
-			}
-		)
+
+
+		let cameraOptions = {
+			sourceType: Camera.PictureSourceType.CAMERA,
+			destinationType: Camera.DestinationType.DATA_URL,
+			quality: 100,
+			targetWidth: 600,
+			targetHeight: 600,
+			encodingType: Camera.EncodingType.JPEG,
+			correctOrientation: true
+		}
+
+		Camera.getPicture(cameraOptions).then(imageData => {
+			let loader = this.loadingCtrl.create({
+				content: 'Cargando...',
+			});
+			loader.present()
+			let base64Image = 'data:image/jpeg;base64,' + imageData;
+			let bold = this.comun.dataURItoBlob(base64Image)
+
+			let storageRef = firebase.storage().ref()
+			let time = new Date().getTime()
+			let uploadTask = storageRef.child('facturas/' + time + '.jpg').put(bold)
+			uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+				snapshot => {
+					let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					console.log('Upload is ' + progress + '% done');
+				},
+				err => {
+					loader.dismiss()
+					this.comun.showAlert('Error', err.message)
+				},
+				() => {
+					let downloadURL = uploadTask.snapshot.downloadURL
+					let user = firebase.auth().currentUser
+					firebase.database().ref('facturas').push({
+						user: user.uid,
+						photo: downloadURL
+					}, (a) => {
+						loader.dismiss()
+						this.comun.showAlert('Gracias', 'El equipo de redime validará tu factura y muy pronto sumaremos tus puntos')
+					})
+
+				}
+			)
+		})
+
 	}
 
 	pagar() {
@@ -215,11 +250,11 @@ export class PrincipalPage {
 								return data
 							}, (a, b, c) => {
 								load.dismiss()
-								this.comun.showAlert('Transacción terminada','Se descontaron '+ valor+' de tu RediCash')
+								this.comun.showAlert('Transacción terminada', 'Se descontaron ' + valor + ' de tu RediCash')
 							})
 						}
-						else if(!data['cancelled'])
-							this.comun.showAlert('Error', 'Código invalido')	
+						else if (!data['cancelled'])
+							this.comun.showAlert('Error', 'Código invalido')
 					},
 					err => {
 						console.log(err)
@@ -233,3 +268,5 @@ export class PrincipalPage {
 
 
 }
+
+
