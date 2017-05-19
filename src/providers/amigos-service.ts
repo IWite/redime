@@ -44,7 +44,7 @@ export class AmigosService {
 
 	verificacionPadreagregar(padre, key) {
 		return new Promise((data, err) => {
-			if (padre == '')
+			if (padre == '-')
 				data()
 			else if (padre == key)
 				err()
@@ -66,7 +66,7 @@ export class AmigosService {
 		return new Promise((data, err) => {
 			firebase.database().ref('usuarios').child(hijo).child('padre').transaction(pad => {
 				if (pad != null) {
-					if (pad == '') {
+					if (pad == '-') {
 						pad = padre
 						data()
 					}

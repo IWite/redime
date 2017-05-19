@@ -168,7 +168,7 @@ export class Amigos {
 							if(Object(this.userBack.datosUsuatio.hijos).length == this.userBack.datosUsuatio.infoPuntos.numAmigos)
 								err2 => this.comun.showAlert('Error', 'No puedes agregar más amigos')
 							else if(this.userBack.datosUsuatio.hijos && this.userBack.datosUsuatio.hijos[data]){
-								this.comun.showAlert('Error', 'El usuario ya esta en tu red')
+								this.comun.showAlert('Error', 'El usuario ya esta en tu comunidad')
 							}
 							else{
 								this.amigosService.agregarReferenciaPadre(data,this.userBack.user.uid).then(
@@ -182,7 +182,7 @@ export class Amigos {
 								)
 							}
 						},
-						err2 => this.comun.showAlert('Error', 'No puedes agregar a un usuario que ya esta en tu red')
+						err2 => this.comun.showAlert('Error', 'No puedes agregar a un usuario que ya esta en tu comunidad')
 					)
 				},
 				err => this.comun.showAlert('Error', 'Código no valido')

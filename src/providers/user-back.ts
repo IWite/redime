@@ -205,7 +205,7 @@ export class UserBack {
 		firebase.database().ref('usuarios/'+this.user.uid+'/hijos/'+key).remove()
 		firebase.database().ref('usuarios/'+key+'/padre').transaction((data)=>{
 			if(data){
-				data = ''
+				data = '-'
 			}
 			return data
 		})

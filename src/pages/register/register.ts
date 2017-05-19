@@ -73,7 +73,7 @@ export class RegisterPage {
 
     createCount() {
         let infoUser: DatosUsuario = {
-            padre: '',
+            padre: '-',
             foto: this.userBack.user.photoURL,
             nombre: this.userBack.user.displayName,
             infoPuntos: {
