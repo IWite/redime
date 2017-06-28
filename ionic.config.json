@@ -1,6 +1,5 @@
 {
   "name": "Redime",
   "app_id": "87d591d8",
-  "v2": true,
-  "typescript": true
+  "type": "ionic-angular"
 }
